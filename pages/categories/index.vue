@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+
 useHead({
   title: "Categories",
   meta: [
@@ -8,6 +9,9 @@ useHead({
     },
   ],
 });
+
+const { data: categories } = await useWpApi().getCategories();
+
 </script>
 
 <template>
@@ -16,21 +20,11 @@ useHead({
       <div class="flex flex-wrap gap-5">
 
         <NuxtLink
-          to="/categories/clean-code"
+          v-for="category in categories"
+          :key="(category as any).id"
+          :to="`/categories/${(category as any).slug}`"
           class="flex items-center justify-center px-4 py-2 text-2xl text-white uppercase duration-200 bg-blue-600 rounded shadow-md hover:shadow-lg">
-          <span class="font-semibold">#CLEAN CODE</span>
-        </NuxtLink>
-
-        <NuxtLink
-          to="/categories/clean-code"
-          class="flex items-center justify-center px-4 py-2 text-2xl text-white uppercase duration-200 bg-blue-600 rounded shadow-md hover:shadow-lg">
-          <span class="font-semibold">#JAVASCRIPT</span>
-        </NuxtLink>
-
-        <NuxtLink
-          to="/categories/clean-code"
-          class="flex items-center justify-center px-4 py-2 text-2xl text-white uppercase duration-200 bg-blue-600 rounded shadow-md hover:shadow-lg">
-          <span class="font-semibold">#DEVOPS</span>
+          <span class="font-semibold">#{{ (category as any).name }}</span>
         </NuxtLink>
 
       </div>

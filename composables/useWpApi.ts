@@ -35,7 +35,7 @@ export default () => {
     }
 
     // get all categories
-    const getCatgories = async (fields: string = "name,slug,count") => {
+    const getCategories = async (fields: string = "name,slug,count") => {
         return get<any>(`categories`);
     }
 
@@ -48,7 +48,7 @@ export default () => {
         get,
         getPosts,
         getPost,
-        getCatgories,
+        getCategories,
         getCategory,
     }
 
