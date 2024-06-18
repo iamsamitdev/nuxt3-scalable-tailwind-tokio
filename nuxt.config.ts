@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config'
+
 export default defineNuxtConfig({
 
   css: ['~/assets/css/tailwind.css'],
@@ -45,5 +47,10 @@ export default defineNuxtConfig({
         ]
     }
   },
+  // runtimeConfig: {
+  //   public: {
+  //     wpUri: process.env.WP_URI,
+  //   }
+  // },
   devtools: { enabled: true }
 })

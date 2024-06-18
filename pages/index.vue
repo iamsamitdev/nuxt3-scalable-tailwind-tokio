@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+
+  // import useWpApi from '~~/composables/useWpApi'
+
   useHead({
     title: 'Home',
     meta: [
@@ -12,6 +15,11 @@
       },
     ],
   })
+
+  const { data: posts, error } = await useWpApi().getPosts()
+
+  // console.log(posts)
+
 </script>
 
 <template>
@@ -59,46 +67,16 @@
       <div class="container py-10">
         <div class="grid gap-10 sm:grid-cols-3">
           <BlogGrid
-            title="The Dark Truth About Baby Cereal"
-            image="https://www.itgenius.co.th/sandbox_api/flutter_news_api/wp-content/uploads/2021/06/little-girl-home-with-cart-vegetables_231056-89.jpg"
-            excerpt="Baby cereal was first introduced in the 1930s, which was when a monumental shift occurred away from real foods towards processed convenience foods. Previously known as pablum, mothers were advised to mix it into a bottle with breast milk for babies as young as six weeks old"
-            slug="https://www.itgenius.co.th/sandbox_api/flutter_news_api/the-dark-truth-about-baby-cereal/"
+            v-for="post in posts"
+            :key="post.id"
+            :title="post.title.rendered"
+            :image="post._embedded['wp:featuredmedia'][0]?.source_url"
+            :excerpt="post.excerpt.rendered"
+            :slug="post.slug"
           ></BlogGrid>
-
-          <BlogGrid
-            title="Best Baby Games: Birth to 18 Months"
-            image="https://www.itgenius.co.th/sandbox_api/flutter_news_api/wp-content/uploads/2021/06/little-boy-plays-with-colorful-pyramid-white-background-with-space-text_208700-1860.jpeg"
-            excerpt="Never Too Young for Fun</h2>\n\n\n\n<p>Something about the stuffed animal we dubbed “crinkle puppy” for its crinkly sound when squeezed left my daughter Emma, 3 months at the time, smiling each time I placed it in front of her. Maybe it was the contrasting colors that held Emma’s attention. It could have been the way I often “spoke” for the puppy, giving Emma an idea of what a real puppy would sound"
-            slug="https://www.itgenius.co.th/sandbox_api/flutter_news_api/best-baby-games-birth-to-18-months/"
-          ></BlogGrid>
-
-          <BlogGrid
-            title="Easy Tips for Grooming Your Newborn"
-            image="https://www.itgenius.co.th/sandbox_api/flutter_news_api/wp-content/uploads/2021/06/woman-brushing-young-girl-s-hair-while-sitting-near-window-woman-combing-her-3-year-old-daughter-s-hair_73762-537.jpg"
-            excerpt="Grooming a newborn can be a nerve-wracking experience, especially for first-time parents From caring for the umbilical cord to trimming tiny nails, parents have a lot to learn when it comes to keeping their little ones “baby fresh. Liz Drake, a clinical nurse specialist in the neonatal intensive care unit at CHOC Children"
-            slug="https://www.itgenius.co.th/sandbox_api/flutter_news_api/easy-tips-for-grooming-your-newborn/"
-          ></BlogGrid>
-
-          <BlogGrid
-            title="The Dark Truth About Baby Cereal"
-            image="https://www.itgenius.co.th/sandbox_api/flutter_news_api/wp-content/uploads/2021/06/little-girl-home-with-cart-vegetables_231056-89.jpg"
-            excerpt="Baby cereal was first introduced in the 1930s, which was when a monumental shift occurred away from real foods towards processed convenience foods. Previously known as pablum, mothers were advised to mix it into a bottle with breast milk for babies as young as six weeks old"
-            slug="https://www.itgenius.co.th/sandbox_api/flutter_news_api/the-dark-truth-about-baby-cereal/"
-          ></BlogGrid>
-
-          <BlogGrid
-            title="Best Baby Games: Birth to 18 Months"
-            image="https://www.itgenius.co.th/sandbox_api/flutter_news_api/wp-content/uploads/2021/06/little-boy-plays-with-colorful-pyramid-white-background-with-space-text_208700-1860.jpeg"
-            excerpt="Never Too Young for Fun</h2>\n\n\n\n<p>Something about the stuffed animal we dubbed “crinkle puppy” for its crinkly sound when squeezed left my daughter Emma, 3 months at the time, smiling each time I placed it in front of her. Maybe it was the contrasting colors that held Emma’s attention. It could have been the way I often “spoke” for the puppy, giving Emma an idea of what a real puppy would sound"
-            slug="https://www.itgenius.co.th/sandbox_api/flutter_news_api/best-baby-games-birth-to-18-months/"
-          ></BlogGrid>
-
-          <BlogGrid
-            title="Easy Tips for Grooming Your Newborn"
-            image="https://www.itgenius.co.th/sandbox_api/flutter_news_api/wp-content/uploads/2021/06/woman-brushing-young-girl-s-hair-while-sitting-near-window-woman-combing-her-3-year-old-daughter-s-hair_73762-537.jpg"
-            excerpt="Grooming a newborn can be a nerve-wracking experience, especially for first-time parents From caring for the umbilical cord to trimming tiny nails, parents have a lot to learn when it comes to keeping their little ones “baby fresh. Liz Drake, a clinical nurse specialist in the neonatal intensive care unit at CHOC Children"
-            slug="https://www.itgenius.co.th/sandbox_api/flutter_news_api/easy-tips-for-grooming-your-newborn/"
-          ></BlogGrid>
+        </div>
+        <div v-if="error">
+          <p class="text-red-500">Error: {{ error }}</p>
         </div>
       </div>
     </section>
