@@ -11,7 +11,7 @@ export default () => {
     // const WP_URL = config.public.wpUri
 
     const get = async <T>(endpoint: string) => {
-        return useFetch<T>(`${import.meta.env.VITE_WP_URI}/wp-json/wp/v2/${endpoint}`)
+        return useFetch<T>(`${process.env.VITE_WP_URI}/wp-json/wp/v2/${endpoint}`)
     }
 
     // Get all posts
@@ -25,7 +25,7 @@ export default () => {
         if (category) {
             query += `&categories=${category}`;
         }
-        console.log(import.meta.env.VITE_WP_URI)
+        console.log(process.env.VITE_WP_URI)
         return get<Post[]>(query);
     }
 
