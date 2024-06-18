@@ -16,7 +16,7 @@
 
 <template>
   <main>
-    <section class="bg-gray-100">
+    <section>
         <div class="container flex flex-wrap items-center py-12 mx-auto">
           <div
             class="avatar relative h-[200px] w-[200px] rounded overflow-hidden mr-10 mb-5 sm:mb-0 shadow-xl"
