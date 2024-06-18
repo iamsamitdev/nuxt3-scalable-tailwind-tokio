@@ -1,4 +1,21 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+
+
+useHead({
+    title: 'Contact us',
+    meta: [
+      { 
+        name: 'description', 
+        content: 'Contact Nuxt 3, IT Genius Engineering' 
+      },
+      {
+        name: 'keywords',
+        content: 'Contact, Nuxt 3, Learning Nuxt 3'
+      },
+    ],
+  })
+
+</script>
 
 <template>
   <section>
