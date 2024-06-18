@@ -47,10 +47,8 @@ export default defineNuxtConfig({
         ]
     }
   },
-  // runtimeConfig: {
-  //   public: {
-  //     wpUri: process.env.WP_URI,
-  //   }
-  // },
+  runtimeConfig: {
+    wpUri: process.env.VITE_WP_URI,
+  },
   devtools: { enabled: true }
 })

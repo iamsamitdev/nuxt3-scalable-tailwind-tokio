@@ -7,11 +7,11 @@ import { type Post } from '~~/types/post'
 
 export default () => {
 
-    // const config = useRuntimeConfig()
-    // const WP_URL = config.public.wpUri
+    const config = useRuntimeConfig()
+    const WP_URL = config.wpUri
 
     const get = async <T>(endpoint: string) => {
-        return useFetch<T>(`${process.env.VITE_WP_URI}/wp-json/wp/v2/${endpoint}`)
+        return useFetch<T>(`${WP_URL}/wp-json/wp/v2/${endpoint}`)
     }
 
     // Get all posts
@@ -25,7 +25,7 @@ export default () => {
         if (category) {
             query += `&categories=${category}`;
         }
-        console.log(process.env.VITE_WP_URI)
+        console.log(WP_URL)
         return get<Post[]>(query);
     }
 
